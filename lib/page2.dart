@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:poojamathpuzzle/page3.dart';
 
 class page2 extends StatefulWidget {
   const page2({Key? key}) : super(key: key);
@@ -9,6 +10,20 @@ class page2 extends StatefulWidget {
 }
 
 class _page2State extends State<page2> {
+  List numbers = [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    0,
+  ];
+  int currentnumber = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -94,16 +109,53 @@ class _page2State extends State<page2> {
                         ),
                       ),
                       Expanded(
-                        child: Container(
-                          height: 40,
-                          width: 100,
-                          child: Text("SUBMIT",
-                              style:
-                                  TextStyle(fontSize: 30, color: Colors.white)),
+                        child: InkWell(onTap: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context) {
+                            return page3();
+
+                          },));
+                        },
+                          child: Container(
+                            height: 40,
+                            width: 100,
+                            child: Text("SUBMIT",
+                                style:
+                                    TextStyle(fontSize: 30, color: Colors.white)),
+                          ),
                         ),
                       ),
                     ],
                   ),
+                  Container(
+                    height: 70,
+                    child: GridView.builder(
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      itemCount: numbers.length,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 1),
+                      itemBuilder: (context, index) {
+                        return InkWell(
+                          onTap: () {
+                            setState(() {
+                              currentnumber = numbers[index];
+                            });
+                          },
+                          child: Container(
+                            child: Center(
+                              child: Text(
+                                "$index",
+                                style: TextStyle(color: Colors.white,fontSize: 20,),
+                              ),
+
+                            ),
+                            decoration: BoxDecoration(border: Border.all(color: Colors.white)),
+                            margin: EdgeInsets.all(3),
+                          ),
+                        );
+                      },
+                    ),
+                  )
                 ],
               ),
               height: 150,
@@ -115,4 +167,8 @@ class _page2State extends State<page2> {
       ),
     );
   }
+
+
+
+
 }
