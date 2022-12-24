@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:poojamathpuzzle/main.dart';
 import 'package:poojamathpuzzle/page3.dart';
 
 class page2 extends StatefulWidget {
@@ -10,19 +11,9 @@ class page2 extends StatefulWidget {
 }
 
 class _page2State extends State<page2> {
-  List numbers = [
-    1,
-    2,
-    3,
-    4,
-    5,
-    6,
-    7,
-    8,
-    9,
-    0,
-  ];
-  int currentnumber = 0;
+  static List numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
+  String ans = "";
+  List answer = ["10", "25", "6", "14", "128", "7", "50", "1025", "100", "3"];
 
   @override
   Widget build(BuildContext context) {
@@ -30,20 +21,20 @@ class _page2State extends State<page2> {
       body: Container(
         height: double.infinity,
         width: double.infinity,
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
             image: DecorationImage(
                 image: AssetImage("images/gameplaybackground.jpg"),
                 fit: BoxFit.fill)),
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 20),
+              padding: const EdgeInsets.only(top: 25,left: 2),
               child: Row(
                 children: [
                   Expanded(
                     child: Container(
-                      height: 70,
-                      width: 70,
+                      height: 50,
+                      width: 50,
                       decoration: BoxDecoration(
                           image: DecorationImage(
                               image: AssetImage("images/skip.png"))),
@@ -57,19 +48,20 @@ class _page2State extends State<page2> {
                           image: DecorationImage(
                               image: AssetImage("images/level_board.png"))),
                       child: Center(
-                          child: Text("Puzzle 1",
+                          child: Text("Puzzle ${mathpuzzle1.puzzlenum}",
                               style: TextStyle(
-                                  fontSize: 30, color: Colors.black))),
+                                  fontSize: 22, color: Colors.black))),
                     ),
                   ),
                   Expanded(
                     child: Container(
-                      height: 70,
-                      width: 70,
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image: AssetImage("images/hint.png"))),
-                    ),
+                      height: 50,
+                        width: 50,
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image: AssetImage("images/hint.png"))),
+                      ),
+
                   )
                 ],
               ),
@@ -80,7 +72,7 @@ class _page2State extends State<page2> {
                 child: Container(
                   decoration: BoxDecoration(
                       image:
-                          DecorationImage(image: AssetImage("images/p1.png"))),
+                          DecorationImage(image: AssetImage("images/p${mathpuzzle1.puzzlenum}.png"))),
                 ),
               ),
             ),
@@ -89,71 +81,95 @@ class _page2State extends State<page2> {
                 children: [
                   Row(
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.all(10),
-                        child: Expanded(
-                          child: Container(
-                            height: 40,
-                            width: 600,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
                       Expanded(
                         child: Container(
+                          margin: EdgeInsets.all(10),
                           height: 40,
-                          width: 150,
+                          width: 190,
+                          color: Colors.white,
+                          child: Center(
+                              child: Text("$ans",
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                  ))),
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                        setState(() {
+                          ans=ans.substring(0,ans.length-1);
+                        });
+                        },
+                        child: Container(
+                          height: 40,
+                          width: 50,
                           decoration: BoxDecoration(
                               image: DecorationImage(
                                   image: AssetImage("images/delete.png"))),
                         ),
                       ),
-                      Expanded(
-                        child: InkWell(onTap: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) {
-                            return page3();
+                      InkWell(
+                        onTap: () {
+                          setState(() {
+                            if(ans == answer[mathpuzzle1.puzzlenum-1])
+                            {
+                              Navigator.push(context, MaterialPageRoute(
+                                builder: (context) {
+                                  return page3();
 
-                          },));
+                                },
+                              ));
+
+                            }
+                          });
                         },
-                          child: Container(
-                            height: 40,
-                            width: 100,
+                        child: Container(
+                          height: 40,
+                          width: 90,
+                          child: Center(
                             child: Text("SUBMIT",
                                 style:
-                                    TextStyle(fontSize: 30, color: Colors.white)),
+                                    TextStyle(fontSize: 18, color: Colors.white)),
                           ),
                         ),
                       ),
                     ],
                   ),
-                  Container(
-                    height: 70,
-                    child: GridView.builder(
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      itemCount: numbers.length,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 1),
-                      itemBuilder: (context, index) {
-                        return InkWell(
-                          onTap: () {
-                            setState(() {
-                              currentnumber = numbers[index];
-                            });
-                          },
-                          child: Container(
-                            child: Center(
-                              child: Text(
-                                "$index",
-                                style: TextStyle(color: Colors.white,fontSize: 20,),
+                  Center(
+                    child: Container(
+                      margin: EdgeInsets.only(top: 15,left: 2,bottom: 15),
+                      height: 50,
+                      child: GridView.builder(
+                        // shrinkWrap: true,
+                        scrollDirection: Axis.horizontal,
+                        itemCount: numbers.length,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 1),
+                        itemBuilder: (context, index) {
+                          return InkWell(
+                            onTap: () {
+                              setState(() {
+                                ans = ans + numbers[index];
+                              });
+                              // print("=====================$ans");
+                            },
+                            child: Container(
+                              child: Center(
+                                child: Text(
+                                  "${numbers[index]}",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                  ),
+                                ),
                               ),
-
+                              decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.white)),
+                              margin: EdgeInsets.all(3),
                             ),
-                            decoration: BoxDecoration(border: Border.all(color: Colors.white)),
-                            margin: EdgeInsets.all(3),
-                          ),
-                        );
-                      },
+                          );
+                        },
+                      ),
                     ),
                   )
                 ],
@@ -167,8 +183,4 @@ class _page2State extends State<page2> {
       ),
     );
   }
-
-
-
-
 }

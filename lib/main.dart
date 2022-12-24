@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:poojamathpuzzle/page2.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -10,11 +11,23 @@ void main() {
 class mathpuzzle1 extends StatefulWidget {
   const mathpuzzle1({Key? key}) : super(key: key);
 
+  static int puzzlenum=1;
+  static SharedPreferences?  prefs;
+
+
   @override
   State<mathpuzzle1> createState() => _mathpuzzle1State();
 }
 
 class _mathpuzzle1State extends State<mathpuzzle1> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    SharedPreferences1();
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,7 +43,7 @@ class _mathpuzzle1State extends State<mathpuzzle1> {
             ),
             child: Center(
               child: Container(
-                margin: EdgeInsets.all(100),
+                margin: EdgeInsets.all(50),
                 height: double.infinity,
                 width: double.infinity,
                 decoration: BoxDecoration(
@@ -73,5 +86,15 @@ class _mathpuzzle1State extends State<mathpuzzle1> {
                 ),
               ),
             )));
+  }
+
+  Future<void> SharedPreferences1() async {
+     mathpuzzle1.prefs = await SharedPreferences.getInstance();
+     setState(() {
+       mathpuzzle1.puzzlenum=mathpuzzle1.prefs!.getInt("level")??1;
+     });
+
+
+
   }
 }
