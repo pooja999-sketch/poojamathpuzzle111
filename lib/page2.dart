@@ -28,16 +28,47 @@ class _page2State extends State<page2> {
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 25,left: 2),
+              padding: const EdgeInsets.only(top: 25, left: 2),
               child: Row(
                 children: [
                   Expanded(
-                    child: Container(
-                      height: 50,
-                      width: 50,
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image: AssetImage("images/skip.png"))),
+                    child: InkWell(
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              title: Text(
+                                "Skip\nAre you sure You want to skip this level?You can play skipped levels later by clicking on PLUZZLES menu from main screen",
+                                style: TextStyle(
+                                    fontSize: 20, color: Colors.black),
+                              ),
+                              actions: [
+                                TextButton(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    }, child: Text("Cancle")),
+                                TextButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        mathpuzzle1.puzzlenum++;
+                                        Navigator.pop(context);
+
+                                      });
+                                    },
+                                    child: Text("Ok"))
+                              ],
+                            );
+                          },
+                        );
+                      },
+                      child: Container(
+                        height: 50,
+                        width: 50,
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image: AssetImage("images/skip.png"))),
+                      ),
                     ),
                   ),
                   Expanded(
@@ -56,12 +87,11 @@ class _page2State extends State<page2> {
                   Expanded(
                     child: Container(
                       height: 50,
-                        width: 50,
-                        decoration: BoxDecoration(
-                            image: DecorationImage(
-                                image: AssetImage("images/hint.png"))),
-                      ),
-
+                      width: 50,
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: AssetImage("images/hint.png"))),
+                    ),
                   )
                 ],
               ),
@@ -71,8 +101,9 @@ class _page2State extends State<page2> {
                 padding: const EdgeInsets.only(top: 20),
                 child: Container(
                   decoration: BoxDecoration(
-                      image:
-                          DecorationImage(image: AssetImage("images/p${mathpuzzle1.puzzlenum}.png"))),
+                      image: DecorationImage(
+                          image: AssetImage(
+                              "images/p${mathpuzzle1.puzzlenum}.png"))),
                 ),
               ),
             ),
@@ -96,9 +127,9 @@ class _page2State extends State<page2> {
                       ),
                       InkWell(
                         onTap: () {
-                        setState(() {
-                          ans=ans.substring(0,ans.length-1);
-                        });
+                          setState(() {
+                            ans = ans.substring(0, ans.length - 1);
+                          });
                         },
                         child: Container(
                           height: 40,
@@ -111,15 +142,12 @@ class _page2State extends State<page2> {
                       InkWell(
                         onTap: () {
                           setState(() {
-                            if(ans == answer[mathpuzzle1.puzzlenum-1])
-                            {
+                            if (ans == answer[mathpuzzle1.puzzlenum - 1]) {
                               Navigator.push(context, MaterialPageRoute(
                                 builder: (context) {
                                   return page3();
-
                                 },
                               ));
-
                             }
                           });
                         },
@@ -128,8 +156,8 @@ class _page2State extends State<page2> {
                           width: 90,
                           child: Center(
                             child: Text("SUBMIT",
-                                style:
-                                    TextStyle(fontSize: 18, color: Colors.white)),
+                                style: TextStyle(
+                                    fontSize: 18, color: Colors.white)),
                           ),
                         ),
                       ),
@@ -137,7 +165,7 @@ class _page2State extends State<page2> {
                   ),
                   Center(
                     child: Container(
-                      margin: EdgeInsets.only(top: 15,left: 2,bottom: 15),
+                      margin: EdgeInsets.only(top: 15, left: 2, bottom: 15),
                       height: 50,
                       child: GridView.builder(
                         // shrinkWrap: true,
