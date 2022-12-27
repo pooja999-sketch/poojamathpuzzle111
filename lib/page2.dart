@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:poojamathpuzzle/main.dart';
 import 'package:poojamathpuzzle/page3.dart';
 
@@ -12,8 +13,6 @@ class page2 extends StatefulWidget {
 
 class _page2State extends State<page2> {
   static List numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
-  String ans = "";
-  List answer = ["10", "25", "6", "14", "128", "7", "50", "1025", "100", "3"];
 
   @override
   Widget build(BuildContext context) {
@@ -47,13 +46,13 @@ class _page2State extends State<page2> {
                                 TextButton(
                                     onPressed: () {
                                       Navigator.pop(context);
-                                    }, child: Text("Cancle")),
+                                    },
+                                    child: Text("Cancle")),
                                 TextButton(
                                     onPressed: () {
                                       setState(() {
                                         mathpuzzle1.puzzlenum++;
                                         Navigator.pop(context);
-
                                       });
                                     },
                                     child: Text("Ok"))
@@ -108,6 +107,9 @@ class _page2State extends State<page2> {
               ),
             ),
             Container(
+              height: 150,
+              width: double.infinity,
+              color: Colors.black,
               child: Column(
                 children: [
                   Row(
@@ -119,7 +121,7 @@ class _page2State extends State<page2> {
                           width: 190,
                           color: Colors.white,
                           child: Center(
-                              child: Text("$ans",
+                              child: Text("$mathpuzzle1.ans",
                                   style: TextStyle(
                                     fontSize: 20,
                                   ))),
@@ -128,7 +130,8 @@ class _page2State extends State<page2> {
                       InkWell(
                         onTap: () {
                           setState(() {
-                            ans = ans.substring(0, ans.length - 1);
+                            mathpuzzle1.ans = mathpuzzle1.ans
+                                .substring(0, mathpuzzle1.ans.length - 1);
                           });
                         },
                         child: Container(
@@ -142,12 +145,22 @@ class _page2State extends State<page2> {
                       InkWell(
                         onTap: () {
                           setState(() {
-                            if (ans == answer[mathpuzzle1.puzzlenum - 1]) {
+                            if (mathpuzzle1.ans ==
+                                mathpuzzle1.answer[mathpuzzle1.puzzlenum - 1]) {
                               Navigator.push(context, MaterialPageRoute(
                                 builder: (context) {
                                   return page3();
                                 },
                               ));
+                            } else {
+                              Fluttertoast.showToast(
+                                  msg: "Wrong!!!",
+                                  toastLength: Toast.LENGTH_SHORT,
+                                  gravity: ToastGravity.CENTER,
+                                  timeInSecForIosWeb: 1,
+                                  backgroundColor: Colors.grey,
+                                  textColor: Colors.black,
+                                  fontSize: 16.0);
                             }
                           });
                         },
@@ -177,7 +190,8 @@ class _page2State extends State<page2> {
                           return InkWell(
                             onTap: () {
                               setState(() {
-                                ans = ans + numbers[index];
+                                mathpuzzle1.ans =
+                                    mathpuzzle1.ans + numbers[index];
                               });
                               // print("=====================$ans");
                             },
@@ -202,9 +216,6 @@ class _page2State extends State<page2> {
                   )
                 ],
               ),
-              height: 150,
-              width: double.infinity,
-              color: Colors.black,
             )
           ],
         ),

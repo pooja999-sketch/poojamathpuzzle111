@@ -57,9 +57,11 @@ class _page3State extends State<page3> {
             Center(
               child: InkWell(
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return mathpuzzle1();
-                  },));
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (context) {
+                      return mathpuzzle1();
+                    },
+                  ));
                 },
                 child: Container(
                   padding: EdgeInsets.all(15),
