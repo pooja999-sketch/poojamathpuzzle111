@@ -18,23 +18,23 @@ class _page3State extends State<page3> {
         height: double.infinity,
         width: double.infinity,
         decoration: const BoxDecoration(
-            image: DecorationImage(image: AssetImage("images/background.jpg"))),
+            image: DecorationImage(image: AssetImage("images/background.jpg"),fit: BoxFit.fill)),
         child: Column(
           children: [
             Center(
               child: Container(
-                margin: EdgeInsets.only(top: 30, bottom: 35),
+                margin: EdgeInsets.only(top: 30, bottom: 30),
                 child: Text("Puzzle ${mathpuzzle1.puzzlenum} Complated",
                     style: TextStyle(fontSize: 30, color: Colors.blue)),
               ),
             ),
-            Image.asset("images/trophy.png"),
+            Image.asset("images/trophy.png",height:170 ),
             Center(
               child: InkWell(
                 onTap: () {
                   setState(() {
                     mathpuzzle1.puzzlenum++;
-                    mathpuzzle1.prefs!.setInt("level", mathpuzzle1.puzzlenum);
+
                     Navigator.push(context, MaterialPageRoute(
                       builder: (context) {
                         return page2();
@@ -89,9 +89,9 @@ class _page3State extends State<page3> {
             ),
             Center(
               child: Container(
-                margin: EdgeInsets.only(top: 20, bottom: 35),
+                margin: EdgeInsets.only(top: 10, bottom: 25),
                 child: Text("SHARE THIS PUZZLE",
-                    style: TextStyle(fontSize: 30, color: Colors.blue)),
+                    style: TextStyle(fontSize: 25, color: Colors.blue)),
               ),
             ),
             Center(
@@ -105,7 +105,7 @@ class _page3State extends State<page3> {
                             colors: [Colors.grey, Colors.white, Colors.grey]),
                         borderRadius: BorderRadius.circular(10),
                         image: DecorationImage(
-                            image: AssetImage("images/shareus.png")),
+                            image: AssetImage("images/shareus.png"),),
                       ))),
             ),
           ],
