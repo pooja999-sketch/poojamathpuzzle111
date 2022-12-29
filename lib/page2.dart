@@ -13,6 +13,7 @@ class page2 extends StatefulWidget {
 
 class _page2State extends State<page2> {
   static List numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
+  String ans = "";
 
   @override
   Widget build(BuildContext context) {
@@ -121,7 +122,7 @@ class _page2State extends State<page2> {
                           width: 190,
                           color: Colors.white,
                           child: Center(
-                              child: Text("$mathpuzzle1.ans",
+                              child: Text("${ans}",
                                   style: TextStyle(
                                     fontSize: 20,
                                   ))),
@@ -130,8 +131,8 @@ class _page2State extends State<page2> {
                       InkWell(
                         onTap: () {
                           setState(() {
-                            mathpuzzle1.ans = mathpuzzle1.ans
-                                .substring(0, mathpuzzle1.ans.length - 1);
+                            ans = ans
+                                .substring(0, ans.length - 1);
                           });
                         },
                         child: Container(
@@ -145,11 +146,21 @@ class _page2State extends State<page2> {
                       InkWell(
                         onTap: () {
                           setState(() {
-                            if (mathpuzzle1.ans ==
+                            if (ans ==
                                 mathpuzzle1.answer[mathpuzzle1.puzzlenum - 1]) {
+                              mathpuzzle1.pass[mathpuzzle1.puzzlenum - 1]='success';
+                              mathpuzzle1.prefs!.setString(("Level ${mathpuzzle1.puzzlenum - 1}"), "success");
+                              mathpuzzle1.puzzlenum++;
+                              mathpuzzle1.prefs!.setString("key1", "pass[index]");
+
+
+
+
+
                               Navigator.push(context, MaterialPageRoute(
                                 builder: (context) {
                                   return page3();
+
                                 },
                               ));
                             } else {
@@ -190,8 +201,8 @@ class _page2State extends State<page2> {
                           return InkWell(
                             onTap: () {
                               setState(() {
-                                mathpuzzle1.ans =
-                                    mathpuzzle1.ans + numbers[index];
+                                ans =
+                                    ans + numbers[index];
                               });
                               // print("=====================$ans");
                             },

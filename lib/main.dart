@@ -28,7 +28,8 @@ class mathpuzzle1 extends StatefulWidget {
     "100",
     "3"
   ];
-  static String ans = "";
+
+  static List pass=[];
 
   @override
   State<mathpuzzle1> createState() => _mathpuzzle1State();
@@ -41,7 +42,6 @@ class _mathpuzzle1State extends State<mathpuzzle1> {
     super.initState();
     SharedPreferences1();
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -108,6 +108,13 @@ class _mathpuzzle1State extends State<mathpuzzle1> {
     mathpuzzle1.prefs = await SharedPreferences.getInstance();
     setState(() {
       mathpuzzle1.puzzlenum = mathpuzzle1.prefs!.getInt("level") ?? 1;
+      for(int i=0;i<mathpuzzle1.answer.length;i++)
+      {
+        mathpuzzle1.pass.add(mathpuzzle1.prefs!.getString("Level ${i}")??"pending");
+      }
+
+     // mathpuzzle1.pass.single(mathpuzzle1.prefs!.getString("key1")??"active");
+
     });
   }
 }
