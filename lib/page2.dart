@@ -161,7 +161,6 @@ class _page2State extends State<page2> {
 
 
 
-
                               Navigator.push(context, MaterialPageRoute(
                                 builder: (context) {
                                   return page3();

@@ -52,7 +52,6 @@ print("${mathpuzzle1.pass}");
                               )),
                           // child: Text("{$index}"),
                         );
-
                       }
                     else
                       {
