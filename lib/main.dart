@@ -112,15 +112,7 @@ class _mathpuzzle1State extends State<mathpuzzle1> {
       {
         mathpuzzle1.pass.add(mathpuzzle1.prefs!.getString("Level ${i}")??"pending");
       }
-<<<<<<< HEAD
       mathpuzzle1.pass[mathpuzzle1.puzzlenum-1]=mathpuzzle1.prefs!.getString("active")??"active";
-
-
-=======
-
-     // mathpuzzle1.pass.single(mathpuzzle1.prefs!.getString("key1")??"active");
->>>>>>> 81071e8206ad72e5fda34e1cadaf80a3a7208944
-
     });
   }
 }
