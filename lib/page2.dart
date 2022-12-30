@@ -52,8 +52,16 @@ class _page2State extends State<page2> {
                                 TextButton(
                                     onPressed: () {
                                       setState(() {
-                                        mathpuzzle1.puzzlenum++;
                                         Navigator.pop(context);
+
+                                        mathpuzzle1.pass[mathpuzzle1.puzzlenum!]="skip";
+
+                                        mathpuzzle1.prefs!.setString(
+                                            "status${mathpuzzle1.puzzlenum}", "skip");
+
+                                        mathpuzzle1.puzzlenum=mathpuzzle1.puzzlenum!+1;
+
+
                                       });
                                     },
                                     child: Text("Ok"))
@@ -79,7 +87,7 @@ class _page2State extends State<page2> {
                           image: DecorationImage(
                               image: AssetImage("images/level_board.png"))),
                       child: Center(
-                          child: Text("Puzzle ${mathpuzzle1.puzzlenum}",
+                          child: Text("Puzzle ${mathpuzzle1.puzzlenum!+1}",
                               style: TextStyle(
                                   fontSize: 22, color: Colors.black))),
                     ),
@@ -103,7 +111,7 @@ class _page2State extends State<page2> {
                   decoration: BoxDecoration(
                       image: DecorationImage(
                           image: AssetImage(
-                              "images/p${mathpuzzle1.puzzlenum}.png"))),
+                              "images/p${mathpuzzle1.puzzlenum!+1}.png"))),
                 ),
               ),
             ),
@@ -131,8 +139,7 @@ class _page2State extends State<page2> {
                       InkWell(
                         onTap: () {
                           setState(() {
-                            ans = ans
-                                .substring(0, ans.length - 1);
+                            ans = ans.substring(0, ans.length - 1);
                           });
                         },
                         child: Container(
@@ -146,25 +153,72 @@ class _page2State extends State<page2> {
                       InkWell(
                         onTap: () {
                           setState(() {
-                            if (ans == mathpuzzle1.answer[mathpuzzle1.puzzlenum - 1]) {
-                              mathpuzzle1.prefs!.setInt("level", mathpuzzle1.puzzlenum);
+                            if (ans == mathpuzzle1.answer[mathpuzzle1.puzzlenum!]) {
 
-                              mathpuzzle1.pass[mathpuzzle1.puzzlenum - 1]='success';
-                              mathpuzzle1.prefs!.setString(("Level ${mathpuzzle1.puzzlenum - 1}"), "success");
+                              if(mathpuzzle1.pass[mathpuzzle1.puzzlenum!]=="clear")
+                                {
+                                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+                                    return page3();
+                                  },));
+                                }
+                              else if(mathpuzzle1.pass[mathpuzzle1.puzzlenum!]=="skip")
+                                {
+                                  setState(() {
+                                    mathpuzzle1.pass[mathpuzzle1.puzzlenum!]=="clear";
+                                    mathpuzzle1.prefs!.setString("status${mathpuzzle1.puzzlenum!}", "clear");
+                                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+                                      return page3();
+                                    },));
+                                  });
+
+                                }
+                              else{
+                                setState(() {
+                                  mathpuzzle1.pass[mathpuzzle1.puzzlenum!]=="clear";
+                                  mathpuzzle1.prefs!.setString("status${mathpuzzle1.puzzlenum!}", "clear");
+                                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+                                    return page3();
+                                  },));
+                                   mathpuzzle1.puzzlenum= mathpuzzle1.puzzlenum!+1;
+                                   mathpuzzle1.prefs!.setInt("level", mathpuzzle1.puzzlenum!);
+                                   print("${mathpuzzle1.pass}");
+
+                                });
+
+
+                              }
 
 
 
-                              mathpuzzle1.pass[mathpuzzle1.puzzlenum - 1]="active";
-                              mathpuzzle1.prefs!.setString("active", "active");
+
+                            // mathpuzzle1.puzzlenum= mathpuzzle1.puzzlenum!+1;
+
+                              //mathpuzzle1.prefs!.setString(
+                                 // "status${mathpuzzle1.puzzlenum}",mathpuzzle1.Isclear);
 
 
 
 
 
-                              Navigator.push(context, MaterialPageRoute(
+                              // if (ans ==
+                              //     mathpuzzle1.answer[mathpuzzle1.puzzlenum!]) {
+                              //   mathpuzzle1.prefs!.setString(
+                              //       ("Level${mathpuzzle1.puzzlenum!}"),
+                              //       "success");
+                              //
+                              //     mathpuzzle1.puzzlenum= mathpuzzle1.puzzlenum!+1;
+                              //
+                              //
+                              //   mathpuzzle1.prefs!
+                              //       .setInt("level", mathpuzzle1.puzzlenum!);
+                              //   // mathpuzzle1.pass[mathpuzzle1.puzzlenum - 1]='success';
+                              //   // mathpuzzle1.pass[mathpuzzle1.puzzlenum - 1]="active";
+                              //   mathpuzzle1.prefs!.setString("active", "active");
+
+                              Navigator.pushReplacement(context,
+                                  MaterialPageRoute(
                                 builder: (context) {
                                   return page3();
-
                                 },
                               ));
                             } else {
@@ -205,8 +259,7 @@ class _page2State extends State<page2> {
                           return InkWell(
                             onTap: () {
                               setState(() {
-                                ans =
-                                    ans + numbers[index];
+                                ans = ans + numbers[index];
                               });
                               // print("=====================$ans");
                             },

@@ -12,10 +12,12 @@ void main() {
 class mathpuzzle1 extends StatefulWidget {
   const mathpuzzle1({Key? key}) : super(key: key);
 
-  static int puzzlenum = 1;
+  static int? puzzlenum;
   static SharedPreferences? prefs;
 
-  static bool y = true;
+
+
+
   static List answer = [
     "10",
     "25",
@@ -40,7 +42,7 @@ class _mathpuzzle1State extends State<mathpuzzle1> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    SharedPreferences1();
+    share();
   }
   @override
   Widget build(BuildContext context) {
@@ -73,10 +75,11 @@ class _mathpuzzle1State extends State<mathpuzzle1> {
                   children: [
                     TextButton(
                         onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(
+                          Navigator.pushReplacement(context, MaterialPageRoute(
                             builder: (context) {
+                              mathpuzzle1.puzzlenum!+1;
                               return page2();
-                            },
+},
                           ));
                         },
                         child: Center(
@@ -87,7 +90,7 @@ class _mathpuzzle1State extends State<mathpuzzle1> {
                     SizedBox(height: 25),
                     TextButton(
                         onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(
+                          Navigator.pushReplacement(context, MaterialPageRoute(
                             builder: (context) {
                               return page4();
                             },
@@ -104,23 +107,16 @@ class _mathpuzzle1State extends State<mathpuzzle1> {
             )));
   }
 
-  Future<void> SharedPreferences1() async {
+  Future<void> share() async {
     mathpuzzle1.prefs = await SharedPreferences.getInstance();
-    setState(() {
-      mathpuzzle1.puzzlenum = mathpuzzle1.prefs!.getInt("level") ?? 1;
+      mathpuzzle1.puzzlenum = mathpuzzle1.prefs!.getInt("level")?? 0;
+
       for(int i=0;i<mathpuzzle1.answer.length;i++)
-      {
-        mathpuzzle1.pass.add(mathpuzzle1.prefs!.getString("Level ${i}")??"pending");
-      }
-<<<<<<< HEAD
-      mathpuzzle1.pass[mathpuzzle1.puzzlenum-1]=mathpuzzle1.prefs!.getString("active")??"active";
+       {
+         mathpuzzle1.pass.add(mathpuzzle1.prefs!.getString("status$i")??"pending");
+         print("==============${mathpuzzle1.pass}");
 
+       }
 
-=======
-
-     // mathpuzzle1.pass.single(mathpuzzle1.prefs!.getString("key1")??"active");
->>>>>>> 81071e8206ad72e5fda34e1cadaf80a3a7208944
-
-    });
-  }
+   }
 }

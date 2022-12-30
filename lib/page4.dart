@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:poojamathpuzzle/main.dart';
+import 'package:poojamathpuzzle/page3.dart';
 
 class page4 extends StatefulWidget {
   const page4({Key? key}) : super(key: key);
@@ -31,36 +32,34 @@ print("${mathpuzzle1.pass}");
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 4),
                   itemBuilder: (context, index) {
-                    if(mathpuzzle1.pass[index]=="success")
+                    if(mathpuzzle1.pass[index]=="skip")
                       {
                         return Container(
                           margin: EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                              image: DecorationImage(
-                                image: AssetImage("images/tick.png"),
-                              )),
+
                            child: Center(child: Text("${index+1}",style: TextStyle(fontSize: 30)),),
                         );
                       }
                     else if(mathpuzzle1.pass[index]=="pending")
                       {
-                        return Container(
+
+                      return Container(
+                      margin: EdgeInsets.all(10),
+                      decoration: BoxDecoration( image: DecorationImage(
+                      image: AssetImage("images/lock.png"),
+                      )),
+                     );
+                       }
+                    else {
+                      return Container(
                           margin: EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                              image: DecorationImage(
-                                image: AssetImage("images/lock.png"),
-                              )),
-                          // child: Text("{$index}"),
-                        );
-                      }
-                    else
-                      {
-                        return Container(
-                          margin: EdgeInsets.all(10),
-                          decoration: BoxDecoration(),
-                          child: Center(child: Text("${index+1}")),
-                        );
-                      }
+                          decoration: BoxDecoration(image: DecorationImage(
+                            image: AssetImage("images/tick.png"),
+
+                          )),
+                        child: Center(child: Text("${index+1}",style: TextStyle(fontSize: 30)),),
+                      );
+                    }
 
                   },
                 ),

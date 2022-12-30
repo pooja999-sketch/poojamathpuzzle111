@@ -24,7 +24,7 @@ class _page3State extends State<page3> {
             Center(
               child: Container(
                 margin: EdgeInsets.only(top: 30, bottom: 30),
-                child: Text("Puzzle ${mathpuzzle1.puzzlenum} Complated",
+                child: Text("Puzzle ${mathpuzzle1.puzzlenum!} Complated",
                     style: TextStyle(fontSize: 30, color: Colors.blue)),
               ),
             ),
@@ -33,9 +33,7 @@ class _page3State extends State<page3> {
               child: InkWell(
                 onTap: () {
                   setState(() {
-                    mathpuzzle1.puzzlenum++;
-
-                    Navigator.push(context, MaterialPageRoute(
+                    Navigator.pushReplacement(context, MaterialPageRoute(
                       builder: (context) {
                         return page2();
                       },
@@ -57,7 +55,7 @@ class _page3State extends State<page3> {
             Center(
               child: InkWell(
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(
+                  Navigator.pushReplacement(context, MaterialPageRoute(
                     builder: (context) {
                       return mathpuzzle1();
                     },
