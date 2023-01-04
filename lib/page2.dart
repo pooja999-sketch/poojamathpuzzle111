@@ -185,35 +185,7 @@ class _page2State extends State<page2> {
 
                                 });
 
-
                               }
-
-
-
-
-                            // mathpuzzle1.puzzlenum= mathpuzzle1.puzzlenum!+1;
-
-                              //mathpuzzle1.prefs!.setString(
-                                 // "status${mathpuzzle1.puzzlenum}",mathpuzzle1.Isclear);
-
-
-
-
-
-                              // if (ans ==
-                              //     mathpuzzle1.answer[mathpuzzle1.puzzlenum!]) {
-                              //   mathpuzzle1.prefs!.setString(
-                              //       ("Level${mathpuzzle1.puzzlenum!}"),
-                              //       "success");
-                              //
-                              //     mathpuzzle1.puzzlenum= mathpuzzle1.puzzlenum!+1;
-                              //
-                              //
-                              //   mathpuzzle1.prefs!
-                              //       .setInt("level", mathpuzzle1.puzzlenum!);
-                              //   // mathpuzzle1.pass[mathpuzzle1.puzzlenum - 1]='success';
-                              //   // mathpuzzle1.pass[mathpuzzle1.puzzlenum - 1]="active";
-                              //   mathpuzzle1.prefs!.setString("active", "active");
 
                               Navigator.pushReplacement(context,
                                   MaterialPageRoute(
